@@ -1,3 +1,4 @@
+import java.util.Random;
 /**
  *    @author - 
  */
@@ -5,13 +6,14 @@ public class DemoBucles
 {
     private final char ASTERISCO = '*';
     private final char ESPACIO = ' ';
+    private Random generador;
 
     /**
      * Constructor  
      */
     public DemoBucles()
     {
-       
+        generador = new Random();
     }
 
     /**
@@ -26,9 +28,19 @@ public class DemoBucles
      *  Usa bucles while
      */
     public int mayorPotencia2(int numero) {
-        
-        return 0;
-
+        int num = 0;
+        int i = 0;
+        if (numero == 1) {
+            num = numero;
+        }
+        while (num <= numero) {
+            if ((int) Math.pow(2,i) > numero) {
+                return num;
+            }
+            num = (int) Math.pow(2,i);
+            i++;
+        }
+        return num;
     }
 
     /**
@@ -47,9 +59,14 @@ public class DemoBucles
      *  64 =    64
      */
     public void escribirSumaPotencias(int numero) {
-
-         
-
+        while (numero > 0) {
+            System.out.printf("%6d =",numero);
+            while (numero > 0) {
+                System.out.printf("%6d",mayorPotencia2(numero));
+                numero -= mayorPotencia2(numero);
+            }
+            System.out.println();
+        }
     }
 
     /**
@@ -64,9 +81,13 @@ public class DemoBucles
      * 
      */
     public void generarAleatorios(int n) {
-
-       
-
+        int aleatorio = generador.nextInt(256);
+        int i = 1;
+        while (aleatorio != 0 && i <= n) {
+            escribirSumaPotencias(aleatorio);
+            aleatorio = generador.nextInt(256);
+            i++;
+        }
     }
 
     /**
@@ -76,7 +97,9 @@ public class DemoBucles
      */
     public void escribirCaracter(int n, char caracter)
     {
-         
+        for (int i = 0; i < n; i++) {
+            System.out.print(caracter);
+        }
     }
 
     /**
@@ -87,9 +110,6 @@ public class DemoBucles
      */
     public  void mostrarEscalera(int escalones, int alto, int ancho) {
         System.out.println();
-
-         
-
+        
     }
-
 }
